@@ -1,0 +1,307 @@
+<div class="main-content">
+  <form [formGroup]="form">
+
+    <div class="modal-header">
+      <h4 class="modal-title font-weight-bold" id="modal-basic-title">
+        Detalles de la transacción:
+      </h4>
+      <button type="button" class="btn-close" (click)="closeModal()">
+        <i class="fa fa-times-circle" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="modal-divider-container">
+      <hr class="modal-divider">
+    </div>
+
+    <div class="modal-body">
+
+      <!-- Primera Tarjeta, contiene los datos generales del cliente -->
+      <div class="card-container">
+
+        <h5 class="text-center m-2">Datos Generales</h5>
+        <br>
+
+        <div class="row mb-2">
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Nombre Cliente:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="clientName">
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Cuenta Cliente:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="idclient">
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ROW TWO -->
+        <div class="row mb-2">
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Cuenta Servicio:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="ctaService">
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Número Servicio:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="ctaName">
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Segunda Tarjeta, contiene los datos monetarios del cliente -->
+      <div class="card-container">
+
+        <h5 class="text-center m-2">Datos Descuentos</h5>
+        <br>
+
+        <div class="row mb-2">
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Cantidad Global:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="number" class="form-control text-center" formControlName="discount">
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Disponible:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="number" class="form-control text-center" formControlName="dispoDiscount">
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Tipo de Subsidio:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="typeSubsidy">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tercera Tarjeta, contiene los datos de las fechas  -->
+      <div class="card-container">
+
+        <h5 class="text-center m-2">Datos Fechas</h5>
+        <br>
+
+        <div class="row mb-2">
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Fecha Inicial:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="initialDate">
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Fecha Final:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="finalDate">
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ROW TWO -->
+        <div class="row mb-2">
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Fecha Registro:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="date">
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Cuarta Tarjeta, contiene los datos de la transacción  -->
+      <div class="card-container">
+
+        <h5 class="text-center m-2">Datos Operación</h5>
+        <br>
+
+        <div class="row mb-2">
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Transacción:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="action">
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Usuario:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="user">
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ROW TWO -->
+        <div class="row mb-2">
+
+          <div class="col-sm-12 col-md-6 col-lg-6">
+
+            <div class="form-group row">
+              <label class="col-sm-12 col-md-5 col-lg-5">
+                <b>Nueva Lineas:</b>
+              </label>
+
+              <div class="col-sm-12 col-md-7 col-lg-7">
+                <input type="text" class="form-control text-center" formControlName="newLines">
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <label>
+              <b>Comentario:</b>
+            </label>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-12">
+            <textarea type="text" cols="30" rows="10" class="form-control textarea-optional" style="max-height: 100px;" formControlName="comment">
+            </textarea>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+
+    <div class="modal-footer" style="justify-content: end">
+      <button type="button" class="btn btn-round bg-danger" (click)="closeModal()">
+        Cerrar
+      </button>
+    </div>
+
+  </form>
+</div>

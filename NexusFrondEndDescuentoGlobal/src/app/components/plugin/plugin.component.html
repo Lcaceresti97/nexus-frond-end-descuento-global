@@ -1,0 +1,52 @@
+<div class="card" *ngIf="auth">
+    <div class="card-header">
+        <h4 class="card-title" *ngIf="false">Gesti&oacute;n Descuento Global Corporativo</h4>
+        <h4 class="card-title">Control de Subsidios</h4>
+    </div>
+    <div class="card-body">
+        <div class="nav-pills-navigation">
+            <div class="nav-pills-wrapper">
+                <ngb-tabset type="pills" class="nav nav-pills nav-pills-info vertical-pills nav-pills-icons"
+                    [orientation]="'vertical'">
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <i class="now-ui-icons business_money-coins"></i>Cabecera
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-gestion-descuento></app-gestion-descuento>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <i class="now-ui-icons files_paper"></i>Detalles
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-log-descuento></app-log-descuento>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <i class="now-ui-icons files_paper"></i>Historial
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-historial-descuento></app-historial-descuento>
+                        </ng-template>
+                    </ngb-tab>
+                    <ngb-tab>
+                        <ng-template ngbTabTitle>
+                            <i class="now-ui-icons files_paper"></i>Logs
+                        </ng-template>
+                        <ng-template ngbTabContent>
+                            <app-logs-table></app-logs-table>
+                        </ng-template>
+                    </ngb-tab>
+                </ngb-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger text-center" *ngIf="!auth" role="alert">
+    <br>
+    <h1>401 Unauthorized</h1>
+</div>

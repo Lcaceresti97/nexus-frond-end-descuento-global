@@ -1,0 +1,32 @@
+{
+    "/number/*": {
+        "target": "http://192.168.162.15:9105",
+        "secure": true,
+        "changeOring": false
+    },
+    "/adapter/*": {
+        "target": "http://192.168.162.15:9201",
+        "secure": true,
+        "changeOring": false
+    },
+    "/ExecuteOrder/*": {
+        "target": "http://192.168.162.15:7003",
+        "secure": true,
+        "changeOring": false
+    },
+    "/budget/*": {
+        "target": "http://192.168.162.15:9107",
+        "secure": true,
+        "changeOring": false
+    },
+    "/sibiel/*": {
+        "target": "http://192.168.162.15:9107",
+        "secure": true,
+        "changeOring": false
+    },
+    "/log/*": {
+        "target": "http://192.168.162.15:9101",
+        "secure": true,
+        "changeOring": false
+    }
+}

@@ -1,0 +1,45 @@
+.modal-divider-container {
+    margin: 0 1rem;
+    /* Márgenes izquierdo y derecho */
+}
+
+.modal-divider {
+    border: none;
+    border-top: 1px solid #022649;
+    /* Color de la línea */
+    margin: 5;
+    /* Restablecer margen para la línea */
+}
+
+.card-container {
+    border: 1px solid #ddd; /* Añade un borde de 1 píxel sólido */
+    border-radius: 8px; /* Añade esquinas redondeadas */
+    padding: 15px; /* Añade relleno interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una suave sombra */
+    margin-bottom: 15px; /* Añade espacio en la parte inferior para separar de otros elementos */
+}
+
+.btn-close {
+    border: none !important;
+    background: transparent;
+    padding: 0px;
+    width: 30px;
+    height: 30px;
+    font-size: 30px;
+}
+
+.fa {
+    color: #ff3636 !important;
+}
+
+.icon {
+    color: #ffffff !important;
+}
+
+
+
+  textarea {
+    border-radius: 15px !important;
+    border: 1px solid #e3e3e3 !important;
+    padding: 7px 8px !important;
+}

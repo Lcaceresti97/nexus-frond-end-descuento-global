@@ -1,0 +1,200 @@
+<div class="main-content">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" align="center" *ngIf="false">Transaci&oacute;n del Detalle de Descuento Global</h4>
+      <h4 class="card-title" align="center">Transaci&oacute;nes del Control de Subsidios</h4>
+    </div>
+
+    <div class="card-body" *ngIf="!loading">
+
+      <form [formGroup]="formGroup" name="frmDetTodoseDescuento" novalidate>
+
+        <div class="row">
+          <div class="col-md-5">
+            <label for="txtClient">Cliente</label>
+            <input type="text" class="form-control" formControlName="txtName" placeholder="[Nombre del Cliente]"
+            [(ngModel)]="resourceName" readonly>
+          </div>
+        </div>
+
+        <label >Cuenta de Servicio</label>
+        <div class="row">
+          <div class="col-md-5">
+            <angular2-multiselect [data]="dropdownList" formControlName="cboCta" [(ngModel)]="resourceCta" (onSelect)="onItemSelect($event)" 
+              [settings]="dropdownSettings">
+            </angular2-multiselect>
+          </div>
+          <dir class="col-md-1"></dir>
+          <div class="col-md-5">
+            <input type="text" class="form-control" formControlName="txtCuentaServicio" placeholder="[Nombre de la Cuenta de Servicio]"
+            [(ngModel)]="resourceuentaServicio" readonly>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-4">
+            <label for="txtGlobal">Descuento Global</label>
+            <input type="text" class="form-control" formControlName="txtGlobal" placeholder="[Descuento Global]"
+            [(ngModel)]="resourceGlob" readonly>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+              <label for="txtUtilizado">Descuento Utilizado</label>
+              <input type="text" class="form-control" formControlName="txtUtilizado" placeholder="[Descuento Utilizado]"
+              [(ngModel)]="resourceUtil" readonly>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="txtFlotante">Descuento Flotante</label>
+            <input type="text" class="form-control" formControlName="txtFlotante" placeholder="[Descuento Flotante]"
+            [(ngModel)]="resourceFlot" readonly>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="txtDisponible">Descuento Disponible</label>
+            <input type="text" class="form-control" formControlName="txtDisponible" placeholder="[Descuento Disponible]"
+            [(ngModel)]="resourceDisp" readonly>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+              <label for="dtDesde" >Desde &nbsp;</label>
+  
+              <div class="datepicker-container">
+                <div class="form-group">
+                  <input
+                    class="form-control datetimepicker"
+                    placeholder="yyyy-mm-dd"
+                    formControlName="dtDesde"
+                    [(ngModel)]="resourceDesde"
+                    ngbDatepicker
+                    #d2="ngbDatepicker"
+                    (click)="d2.toggle()"
+                    data-color="white"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-md-1"></div>
+  
+            <div class="col-md-5">
+              <label for="dtHasta" >Hasta &nbsp;</label>
+  
+              <div class="datepicker-container">
+                <div class="form-group">
+                  <input
+                    class="form-control datetimepicker"
+                    placeholder="yyyy-mm-dd"
+                    formControlName="dtEnd"
+                    [(ngModel)]="resourceHasta"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (click)="d.toggle()"
+                    data-color="white"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+      </form>
+    </div>
+    
+    <div class="card-footer ">
+        <button type="submit" class="btn btn-fill btn-info" ID="btnConsultar" [disabled]="loadPermiso('GB')" 
+        (click)="btnConsultar_Click()">Consultar</button>
+    </div>
+
+  </div>
+  
+  <br>
+  
+  <h4 class="card-title" align="center">Detalle de Transacci&oacute;n</h4>
+    
+  <br>
+  <!-- TABLA -->
+  <div class="dataTables_wrapper">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="dataTables_length" id="datatable_length">
+          <label>
+            Mostrar Filas:
+            <select
+              name="datatable_length"
+              aria-controls="datatable"
+              class="form-control form-control-sm"
+              (change)="entriesChange($event)"
+            >
+              <option value="10" [selected]="entries==10">10</option>
+              <option value="25" [selected]="entries==25">25</option>
+              <option value="50" [selected]="entries==50">50</option>
+              <option value="-1" [selected]="entries==-1">Todos</option>
+            </select>
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div id="datatable_filter" class="dataTables_filter">
+            <label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Buscar"
+                aria-controls="datatable"
+                (keyup)="filterTable($event)"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <ngx-datatable
+        class="bootstrap selection-cell"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [limit]="entries != -1 ? entries:undefined"
+        [rows]="temp"
+      >
+    
+      <ngx-datatable-column name="resourceFecha">
+        <ng-template ngx-datatable-header-template>Fecha</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="resourceEquipo">
+        <ng-template ngx-datatable-header-template>Equipo</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="resourceTrans">
+        <ng-template ngx-datatable-header-template>Transacci&oacute;n</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="resourceCanal">
+        <ng-template ngx-datatable-header-template>Canal</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="resourceDesc">
+        <ng-template ngx-datatable-header-template>Descuento Global</ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="action">
+        <ng-template ngx-datatable-header-template>Acci&oacute;n</ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>          
+
+  <br/>
+
+  <!-- LOADER -->
+  <div *ngIf="loading">
+      <br><br><br>
+    <div class="row text-center animated fadeIn">
+      <div class="col">
+        <i class="fa fa-sync fa-spin fa-3x"></i>
+        </div>
+      </div>
+      <br><br><br>
+  </div>
+  
+</div>

@@ -1,0 +1,114 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+
+      <div class="card">
+        <div class="card-header">
+          <br>
+          <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12" style="text-align: center;">
+              <h5>Historico de los Controles de Subsidios
+              </h5>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="card-body ">
+
+          <br>
+
+          <div class="row mb-3" style="padding-left: 12px;">
+            <div class="col-12">
+                <div class="row">
+                    <label class="form-label font-size-large text-dark mr-1"><b>Seleccionar Cuenta Servicio:</b>
+                    </label>
+                    <div [classList]="inputClasses">
+                        <angular2-multiselect [data]="dropDownList" [(ngModel)]="selectedItem"
+                             (onSelect)="onItemSelect($event)"
+                             (onDeSelect)="onItemDeSelect($event)"
+                            [settings]="dropsownSettings">
+                        </angular2-multiselect>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+          <div class="dataTables_wrapper">
+
+            <div class="row">
+
+              <div class="col-sm-12 col-md-6">
+                <div class="dataTables_length" id="datatable_length">
+                    <label>
+                        Se muestran
+                        <select aria-controls="datatable" class="form-control form-control-sm"
+                            name="datatable_length" [(ngModel)]="resultsPerPage">
+                            <option [value]="5">5</option>
+                            <option [value]="10">10</option>
+                        </select>
+                        resultados
+                    </label>
+                </div>
+            </div>
+
+              <div class="col-sm-12 col-md-6">
+                <div class="dataTables_filter" id="datatable_filter">
+                  <label>
+                    <input aria-controls="datatable" class="form-control form-control-sm form-control-font-size"
+                      placeholder="Buscar" type="search" [(ngModel)]="searchedValue" (keyup)="search()" />
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <ngx-datatable class="bootstrap selection-cell ngx-datatable fixed-header virtualized mt-2" [rows]="rows"
+            [loadingIndicator]="loadingIndicator" columnMode="force" rowHeight="auto" [limit]="resultsPerPage"
+            [footerHeight]="100"
+            [messages]="{emptyMessage: 'No hay archivos disponibles', totalMessage: getTotalText()}">
+
+            <ngx-datatable-column name="Nombre del Cliente" prop="clientName" [cellClass]="'custom-class'">
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Cuenta Cliente" prop="idclient" [cellClass]="'custom-class'">
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Cuenta Servicio" prop="ctaService" [cellClass]="'custom-class'">
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Transacción" prop="action" [cellClass]="'custom-class'" [width]="80">
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Fecha Registro" [cellClass]="'custom-class'" prop="date">
+              
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Ver más" [cellClass]="'custom-class'">
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+                <button (click)="openModalCrud(row)" type="button" class="btn btn-round btn-sm btn-info" data-placement="right" data-toggle="tooltip"
+                  title="Dar clic para visualizar los detalles">
+                  <i class="now-ui-icons design_bullet-list-67"></i>
+                </button>
+
+              </ng-template>
+            </ngx-datatable-column>
+
+
+
+          </ngx-datatable>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

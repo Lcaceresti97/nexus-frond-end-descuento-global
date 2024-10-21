@@ -1,0 +1,284 @@
+<div class="main-content">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title" align="center" *ngIf="false">Pantalla de Gesti&oacute;n del Descuento Global</h4>
+      <h4 class="card-title" align="center">Pantalla Control de Subsidios</h4>
+    </div>
+
+    <div class="card-body">
+
+      <form *ngIf="!loadingB" [formGroup]="formGroup" name="frmDescuento" novalidate>
+
+        <div class="row">
+            <input type="hidden"  [(ngModel)]="id" id="txtid" formControlName="txtid" />
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <label for="txtClient">Cliente</label>
+            <input type="text" class="form-control" formControlName="txtClient" placeholder="[Nombre del Cliente]"
+            [(ngModel)]="resourceName" readonly>
+          </div>
+        </div>
+
+        
+        <label>Cuenta de Servicio</label>
+        <div class="row" >
+
+          <!-- Ya no va -->
+          <div class="col-md-5" *ngIf="false">
+            <div class="input-group">
+              <input #box type="text" class="form-control" style="color: #002e6e; background-color:white;" formControlName="txtCuenta" ng-pattern="/^-?[0-9][^\.]*$/"
+              placeholder="[Cuenta]" [(ngModel)]="resourceCuenta" (keyup.enter)="searchCta(box.value)" required/>
+              <div class="input-group-append">
+                <div class="input-group-text" style="background-color:white;">
+                <i (click)="searchCta(box.value)"  style="color: #002e6e;" class="now-ui-icons ui-1_zoom-bold" ng-disabled="frmIndividual.$pristine || frmIndividual.$invalid"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lo nuevo -->
+          <div class="col-sm-12 col-md-5 col-lg-5 text-center">
+            <angular2-multiselect class="text-center" [data]="dropDownListService"
+            (onSelect)="onItemSelectAccountService($event)"
+            (onDeSelect)="onItemDeSelectAccountService($event)"
+           [settings]="dropsownSettingsAccountService"
+           formControlName="txtCuenta"
+           >
+            </angular2-multiselect>
+          </div>
+
+          <dir class="col-md-1"></dir>
+          
+          <div class="col-md-5">
+            
+            <input type="text" class="form-control text-center" formControlName="txtCuentaServicio" placeholder="[Nombre de la Cuenta de Servicio]"
+            [(ngModel)]="resourceuentaServicio" readonly>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <label for="txtDesc">Descuento</label>
+            <input type="number" class="form-control text-center" formControlName="txtDesc" id="txtDesc" placeholder="[Descuento]" value="resourceDesc"
+            [(ngModel)]="resourceDesc" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" required>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <label for="txtDesc">Disponible</label>
+            <input type="number" class="form-control text-center" formControlName="txtDisp" id="txtDisp" placeholder="[Disponible]" value="resourceDisp"
+            [(ngModel)]="resourceDisp" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" readonly>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <label for="dtVigencia" >Vigencia &nbsp;</label>
+
+            <div class="datepicker-container">
+              <div class="form-group">
+                <input
+                  class="form-control datetimepicker text-center"
+                  placeholder="yyyy-mm-dd"
+                  formControlName="dtVigencia"
+                  [(ngModel)]="resourceVigencia"
+                  value="resourceVigencia"
+                  ngbDatepicker
+                  #d2="ngbDatepicker"
+                  (click)="d2.toggle()"
+                  data-color="white"
+                  required
+                  [disabled]="disabled"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-1"></div>
+
+          <div class="col-md-5">
+            <label for="dtEnd" >Hasta &nbsp;</label>
+
+            <div class="datepicker-container">
+              <div class="form-group">
+                <input
+                  class="form-control datetimepicker text-center"
+                  placeholder="yyyy-mm-dd"
+                  formControlName="dtEnd"
+                  [(ngModel)]="resourceEnd"
+                  value="resourceEnd"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                  (click)="d.toggle()"
+                  data-color="white"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 checkbox-radios">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" formControlName="chkLine" 
+                [(ngModel)]="resourceLine" [checked]="resourceLine" [attr.disabled]='valorDiabled'/>
+                <span class="form-check-sign"></span> Aplicar Para L&iacute;neas Nuevas
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-5 col-lg-5 text-center">
+            <label>Tipo o Motivo de Subsidio Adicional</label>
+            <angular2-multiselect [data]="dropDownListTypeSubsidy"
+              (onSelect)="onItemSelectTypeSubsidy($event)"
+              (onDeSelect)="onItemDeSelectTypeSubsidy($event)"
+              [settings]="dropsownSettingsTypeSubsidy"
+              formControlName="additionalSubsidy"
+              [(ngModel)]="selectedItem"
+            >
+            </angular2-multiselect>
+          </div>
+
+
+        </div>
+
+        <!-- Row del comentario -->
+        <div class="row mb-2">
+          <div class="col-sm-12 col-md-5 col-lg-5">
+              <label class="form-label"><b>Comentario:</b> </label>
+
+              <textarea cols="30" rows="10" class="form-control textarea-optional" style="max-height: 100px;" formControlName="comment" [(ngModel)]="comment">
+              </textarea>
+             
+          </div>
+      </div>
+
+
+      </form>
+
+      <div *ngIf="loadingB">
+          <br><br><br>
+        <div class="row text-center animated fadeIn">
+          <div class="col">
+            <i class="fa fa-sync fa-spin fa-3x"></i>
+            </div>
+          </div>
+          <br><br><br>
+      </div>
+
+    </div>
+    <div class="card-footer" >
+      <button type="submit" class="btn btn-fill btn-info" ID="btnGuardar" [disabled]="loadPermiso('CR')"  (click)="btnGuardar_Click()">Guardar</button> &nbsp;
+      <button type="submit" class="btn btn-fill btn-warning" ID="btnGuardar" [disabled]="loadPermiso('UP')"  (click)="editBudget()">Modificar</button> &nbsp;
+      <button type="submit" class="btn btn-fill btn-danger" ID="btnGuardar" [disabled]="loadPermiso('DE')"  (click)="deleteBudget()">Eliminar</button>
+    </div>
+
+  </div>
+  <br>
+
+  <h4 class="card-title" align="center">Detalle de Transacci&oacute;n</h4>
+    
+  <br>
+  <!-- TABLA -->
+  <div class="dataTables_wrapper">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="dataTables_length" id="datatable_length">
+          <label>
+            Mostrar Filas:
+            <select
+              name="datatable_length"
+              aria-controls="datatable"
+              class="form-control form-control-sm"
+              (change)="entriesChange($event)"
+            >
+              <option value="10" [selected]="entries==10">10</option>
+              <option value="25" [selected]="entries==25">25</option>
+              <option value="50" [selected]="entries==50">50</option>
+              <option value="-1" [selected]="entries==-1">Todos</option>
+            </select>
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <div id="datatable_filter" class="dataTables_filter">
+            <label>
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Buscar"
+                aria-controls="datatable"
+                [(ngModel)]="searchedValue"
+                (keyup)="searchData()"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <ngx-datatable
+        class="bootstrap selection-cell ngx-datatable fixed-header virtualized mt-2"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [loadingIndicator]="loadingIndicator"
+        [limit]="entries != -1 ? entries:undefined"
+        [rows]="rowsCurrent"
+        [messages]="{emptyMessage: 'No hay archivos disponibles', totalMessage: getTotalText()}"
+      >
+    
+      <ngx-datatable-column name="Código" prop="id" [cellClass]="'custom-class'">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cliente" prop="clientName" [cellClass]="'custom-class'">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cuenta Cliente" prop="idclient" [cellClass]="'custom-class'">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Cuenta Servicio" prop="ctaService" [cellClass]="'custom-class'">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Operación" prop="action" [cellClass]="'custom-class'">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Usuario" prop="user" [cellClass]="'custom-class'">
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Fecha Registro" [cellClass]="'custom-class'" prop="date">
+              
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Ver más" [cellClass]="'custom-class'">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+
+          <button (click)="openModalCrud(row)" type="button" class="btn btn-round btn-sm btn-info" data-placement="right" data-toggle="tooltip"
+            title="Dar clic para visualizar los detalles">
+            <i class="now-ui-icons design_bullet-list-67"></i>
+          </button>
+
+        </ng-template>
+      </ngx-datatable-column>
+
+    
+    </ngx-datatable>
+  </div>          
+
+  <br/>
+
+  <!-- LOADER -->
+  <div *ngIf="loading">
+      <br><br><br>
+    <div class="row text-center animated fadeIn">
+      <div class="col">
+        <i class="fa fa-sync fa-spin fa-3x"></i>
+        </div>
+      </div>
+      <br><br><br>
+  </div>
+
+</div>
